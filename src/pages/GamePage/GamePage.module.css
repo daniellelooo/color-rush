@@ -1,0 +1,118 @@
+.page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 16px 32px;
+  gap: 20px;
+  background: var(--color-bg);
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 4px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statLabel {
+  font-size: 0.7rem;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.statValue {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-accent);
+}
+
+.muteBtn {
+  background: var(--color-surface);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.muteBtn:hover { background: rgba(255,255,255,0.12); }
+
+.wordCard {
+  background: var(--color-surface);
+  border-radius: 20px;
+  padding: 40px 32px;
+  text-align: center;
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.06);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+}
+
+.word {
+  font-size: clamp(2.5rem, 12vw, 4rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  display: block;
+}
+
+.hint {
+  margin-top: 14px;
+  color: var(--color-muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+.levelUpOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.levelUpText {
+  font-size: clamp(2rem, 10vw, 3.5rem);
+  font-weight: 900;
+  color: var(--color-accent);
+  text-shadow: 0 0 40px var(--color-accent);
+  text-align: center;
+}
+
+.ultraBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg, #1565C0, #0288D1);
+  border-radius: 999px;
+  padding: 4px 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 0 20px rgba(2, 136, 209, 0.6);
+}

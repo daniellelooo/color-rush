@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.heart {
+  font-size: 1.6rem;
+  display: inline-block;
+}
