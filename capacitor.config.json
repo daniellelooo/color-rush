@@ -1,0 +1,18 @@
+{
+  "appId": "com.upb.color_rush",
+  "appName": "color-rush",
+  "webDir": "dist",
+  "webDirDistBuildMinification": true,
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "buildOptions": {
+      "keystorePath": null,
+      "keystorePassword": null,
+      "keystoreAlias": null,
+      "keystoreAliasPassword": null,
+      "releaseType": "AAB"
+    }
+  }
+}

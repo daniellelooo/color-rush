@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">color-rush</string>
+    <string name="title_activity_main">color-rush</string>
+    <string name="package_name">com.upb.color_rush</string>
+    <string name="custom_url_scheme">com.upb.color_rush</string>
+</resources>
