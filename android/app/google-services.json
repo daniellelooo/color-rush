@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "309196798496",
+    "project_id": "color-rush-b5494",
+    "storage_bucket": "color-rush-b5494.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309196798496:android:1130f003d6f42b3f51da45",
+        "android_client_info": {
+          "package_name": "com.upb.color_rush"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDYyDSww3A0cPzPaG_a2qXewW9QgSnTRY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

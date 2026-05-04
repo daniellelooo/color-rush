@@ -12,6 +12,7 @@ import ColorButton from '../../components/ColorButton/ColorButton';
 import LivesDisplay from '../../components/LivesDisplay/LivesDisplay';
 import Timer from '../../components/Timer/Timer';
 import styles from './GamePage.module.css';
+import { saveUserScore } from '../../services/userService';
 
 const pageVariants = {
   initial: { opacity: 0, scale: 0.96 },
@@ -68,6 +69,8 @@ export default function GamePage() {
       sound.stopBg();
       saveScore({ playerName, score, level });
       submitScore({ playerName, score, level });
+      // También guardamos en la colección de usuarios (sin prompt, usamos playerName del contexto)
+      saveUserScore(playerName, score).catch(err => console.error('saveUserScore error:', err));
       setTimeout(() => navigate('/score'), 1200);
     }
   }, [isGameOver]);
