@@ -31,6 +31,7 @@ export default function GamePage() {
   const sound = useSound();
   const [locked, setLocked] = useState(false);
   const lockedRef = useRef(false);
+  const pendingUnlockRef = useRef(false);
   const [showLevelUp, setShowLevelUp] = useState(false);
   const [muted, setMuted] = useState(sound.isMuted());
   const [timerKey, setTimerKey] = useState(0);
@@ -52,14 +53,23 @@ export default function GamePage() {
     sound.playWrong();
     loseLife();
     setTimeout(() => {
-      lockedRef.current = false;
-      setLocked(false);
+      pendingUnlockRef.current = true;
       setTimerKey(k => k + 1);
       nextQuestion();
     }, 800);
   }, [loseLife, nextQuestion, sound]);
 
   const { progress } = useTimer(timerDuration, handleExpire, timerKey, showLevelUp);
+
+  // Este efecto corre DESPUÉS del cleanup del timer (orden de efectos de React).
+  // Así garantizamos que el timer viejo ya fue matado antes de abrir el lock.
+  useEffect(() => {
+    if (pendingUnlockRef.current) {
+      pendingUnlockRef.current = false;
+      lockedRef.current = false;
+      setLocked(false);
+    }
+  }, [timerKey]);
 
   useEffect(() => {
     setTimerDuration(config.timePerQuestion);
@@ -89,9 +99,8 @@ export default function GamePage() {
       setLocked(true);
       setTimeout(() => {
         setShowLevelUp(false);
-        lockedRef.current = false;
-        setLocked(false);
         nextLevel();
+        pendingUnlockRef.current = true;
         setTimerKey(k => k + 1);
       }, 2000);
     }
@@ -110,8 +119,7 @@ export default function GamePage() {
       loseLife();
     }
     setTimeout(() => {
-      lockedRef.current = false;
-      setLocked(false);
+      pendingUnlockRef.current = true;
       setTimerKey(k => k + 1);
       nextQuestion();
     }, 600);
