@@ -67,15 +67,14 @@ export default function GamePage() {
   }, [config.timePerQuestion]);
 
   useEffect(() => {
-    if (isGameOver) {
-      sound.playGameOver();
-      sound.stopBg();
-      saveScore({ playerName, score, level });
-      submitScore({ playerName, score, level });
-      // También guardamos en la colección de usuarios (sin prompt, usamos playerName del contexto)
-      saveUserScore(playerName, score).catch(err => console.error('saveUserScore error:', err));
-      setTimeout(() => navigate('/score'), 1200);
-    }
+    if (!isGameOver) return;
+    sound.playGameOver();
+    sound.stopBg();
+    saveScore({ playerName, score, level });
+    submitScore({ playerName, score, level });
+    saveUserScore(playerName, score).catch(err => console.error('saveUserScore error:', err));
+    const t = setTimeout(() => navigate('/score'), 1200);
+    return () => clearTimeout(t);
   }, [isGameOver]);
 
   useEffect(() => {
@@ -144,7 +143,7 @@ export default function GamePage() {
 
       <LivesDisplay lives={lives} maxLives={LEVELS[Math.min(level - 1, LEVELS.length - 1)].lives} />
 
-      <Timer key={timerKey.current} progress={progress} duration={timerDuration} />
+      <Timer key={timerKey} progress={progress} duration={timerDuration} />
 
       {/* Word */}
       <motion.div
