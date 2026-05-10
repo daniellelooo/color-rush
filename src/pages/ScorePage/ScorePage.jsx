@@ -16,11 +16,11 @@ const pageVariants = {
 
 export default function ScorePage() {
   const navigate = useNavigate();
-  const { score, level, isWinner, resetGame, playerName } = useGame();
+  const { score, level, isWinner, isGameOver, resetGame, playerName } = useGame();
   const [localScores, setLocalScores] = useState([]);
   const [onlineScores, setOnlineScores] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const isPostGame = !!playerName && score > 0;
+  const isPostGame = !!playerName && isGameOver;
 
   useEffect(() => {
     setLocalScores(getScores());
