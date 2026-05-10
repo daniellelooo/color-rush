@@ -12,19 +12,26 @@ const pageVariants = {
 
 export default function CreditsPage() {
   const navigate = useNavigate();
-  const { activateUltraInstinct, isUltraInstinct } = useGame();
+  const { activateUltraInstinct, deactivateUltraInstinct, isUltraInstinct } = useGame();
   const [clicks, setClicks] = useState(0);
-  const [ultraActivated, setUltraActivated] = useState(false);
+  const [bannerState, setBannerState] = useState(null); // 'activated' | 'deactivated' | null
 
   const handleLogoClick = () => {
-    if (isUltraInstinct) return;
     const next = clicks + 1;
     setClicks(next);
     if (next >= 7) {
-      activateUltraInstinct();
-      setUltraActivated(true);
+      setClicks(0);
+      if (isUltraInstinct) {
+        deactivateUltraInstinct();
+        setBannerState('deactivated');
+      } else {
+        activateUltraInstinct();
+        setBannerState('activated');
+      }
     }
   };
+
+  const remainingClicks = 7 - clicks;
 
   return (
     <motion.div className={styles.page} variants={pageVariants} initial="initial" animate="animate" exit="exit">
@@ -42,12 +49,13 @@ export default function CreditsPage() {
       </motion.div>
 
       {clicks > 0 && clicks < 7 && (
-        <p className={styles.hint}>{7 - clicks} clicks más...</p>
+        <p className={styles.hint}>{remainingClicks} clicks más...</p>
       )}
 
       <AnimatePresence>
-        {ultraActivated && (
+        {bannerState === 'activated' && (
           <motion.div
+            key="activated"
             className={styles.ultraBanner}
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -56,11 +64,24 @@ export default function CreditsPage() {
             ⚡ ULTRA INSTINCT ACTIVADO ⚡
           </motion.div>
         )}
+        {bannerState === 'deactivated' && (
+          <motion.div
+            key="deactivated"
+            className={styles.ultraBannerOff}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            ULTRA INSTINCT DESACTIVADO
+          </motion.div>
+        )}
       </AnimatePresence>
 
       <div className={styles.card}>
-        <h2 className={styles.sectionTitle}>Desarrollador</h2>
-        <p className={styles.name}>Daniel Andrés Lelo de Larrea</p>
+        <h2 className={styles.sectionTitle}>Desarrolladores</h2>
+        <p className={styles.name}>Daniel Leon</p>
+        <p className={styles.name}>Federico Marquez</p>
+        <p className={styles.name}>Geronimo Gaviria</p>
         <p className={styles.detail}>Aplicaciones Móviles — UPB 2025</p>
         <p className={styles.detail}>React · Framer Motion · Firebase</p>
       </div>

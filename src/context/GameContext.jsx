@@ -59,13 +59,17 @@ export function GameProvider({ children }) {
     setIsUltraInstinct(true);
   }, []);
 
+  const deactivateUltraInstinct = useCallback(() => {
+    setIsUltraInstinct(false);
+  }, []);
+
   return (
     <GameContext.Provider value={{
       playerName, setPlayerName,
       score, lives, level,
       isGameOver, isWinner,
       isUltraInstinct,
-      startGame, addScore, loseLife, nextLevel, resetGame, activateUltraInstinct,
+      startGame, addScore, loseLife, nextLevel, resetGame, activateUltraInstinct, deactivateUltraInstinct,
     }}>
       {children}
     </GameContext.Provider>
