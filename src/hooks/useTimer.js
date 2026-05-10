@@ -1,17 +1,20 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-export function useTimer(duration, onExpire, resetKey = 0) {
+export function useTimer(duration, onExpire, resetKey = 0, paused = false) {
   const [remaining, setRemaining] = useState(duration);
   const onExpireRef = useRef(onExpire);
   const activeRef = useRef(true);
+  const pausedRef = useRef(paused);
 
   useEffect(() => { onExpireRef.current = onExpire; }, [onExpire]);
+  useEffect(() => { pausedRef.current = paused; }, [paused]);
 
   useEffect(() => {
     setRemaining(duration);
     activeRef.current = true;
 
     const interval = setInterval(() => {
+      if (pausedRef.current) return;
       setRemaining(prev => {
         const next = prev - 50;
         if (next <= 0) {

@@ -59,7 +59,7 @@ export default function GamePage() {
     }, 800);
   }, [loseLife, nextQuestion, sound]);
 
-  const { progress } = useTimer(timerDuration, handleExpire, timerKey);
+  const { progress } = useTimer(timerDuration, handleExpire, timerKey, showLevelUp);
 
   useEffect(() => {
     setTimerDuration(config.timePerQuestion);
