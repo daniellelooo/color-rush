@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGame } from '../../context/GameContext';
@@ -30,6 +30,7 @@ export default function GamePage() {
 
   const sound = useSound();
   const [locked, setLocked] = useState(false);
+  const lockedRef = useRef(false);
   const [showLevelUp, setShowLevelUp] = useState(false);
   const [muted, setMuted] = useState(sound.isMuted());
   const [timerKey, setTimerKey] = useState(0);
@@ -45,16 +46,18 @@ export default function GamePage() {
   }, []);
 
   const handleExpire = useCallback(() => {
-    if (locked) return;
+    if (lockedRef.current) return;
+    lockedRef.current = true;
     setLocked(true);
     sound.playWrong();
     loseLife();
     setTimeout(() => {
+      lockedRef.current = false;
       setLocked(false);
       setTimerKey(k => k + 1);
       nextQuestion();
     }, 800);
-  }, [locked, loseLife, nextQuestion, sound]);
+  }, [loseLife, nextQuestion, sound]);
 
   const { progress } = useTimer(timerDuration, handleExpire, timerKey);
 
@@ -83,9 +86,11 @@ export default function GamePage() {
       }
       setShowLevelUp(true);
       sound.playLevelUp();
+      lockedRef.current = true;
       setLocked(true);
       setTimeout(() => {
         setShowLevelUp(false);
+        lockedRef.current = false;
         setLocked(false);
         nextLevel();
         resetProgress();
@@ -95,7 +100,8 @@ export default function GamePage() {
   }, [questionsCompleted]);
 
   const onAnswer = (colorName) => {
-    if (locked) return;
+    if (lockedRef.current) return;
+    lockedRef.current = true;
     setLocked(true);
     const correct = handleAnswer(colorName);
     if (correct) {
@@ -106,6 +112,7 @@ export default function GamePage() {
       loseLife();
     }
     setTimeout(() => {
+      lockedRef.current = false;
       setLocked(false);
       setTimerKey(k => k + 1);
       nextQuestion();
