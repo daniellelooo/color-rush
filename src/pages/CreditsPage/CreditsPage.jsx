@@ -82,7 +82,7 @@ export default function CreditsPage() {
         <p className={styles.name}>Daniel Leon</p>
         <p className={styles.name}>Federico Marquez</p>
         <p className={styles.name}>Geronimo Gaviria</p>
-        <p className={styles.detail}>Aplicaciones Móviles — UPB 2025</p>
+        <p className={styles.detail}>Aplicaciones Móviles — UPB 2026</p>
         <p className={styles.detail}>React · Framer Motion · Firebase</p>
       </div>
 
