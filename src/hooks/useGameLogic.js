@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { COLOR_PALETTE, LEVELS, ULTRA_INSTINCT_TIME } from '../config/gameConfig';
 
 function shuffle(arr) {
@@ -33,6 +33,14 @@ export function useGameLogic(level, isUltraInstinct) {
   const [question, setQuestion] = useState(() => generateQuestion(levelIndex, isUltraInstinct));
   const [questionsCompleted, setQuestionsCompleted] = useState(0);
   const [lastResult, setLastResult] = useState(null); // 'correct' | 'wrong'
+
+  const initialized = useRef(false);
+  useEffect(() => {
+    if (!initialized.current) { initialized.current = true; return; }
+    setQuestion(generateQuestion(levelIndex, isUltraInstinct));
+    setQuestionsCompleted(0);
+    setLastResult(null);
+  }, [levelIndex, isUltraInstinct]);
 
   const nextQuestion = useCallback(() => {
     setQuestion(generateQuestion(levelIndex, isUltraInstinct));

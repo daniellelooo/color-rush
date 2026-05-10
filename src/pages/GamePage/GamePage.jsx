@@ -25,7 +25,7 @@ export default function GamePage() {
   const { playerName, score, lives, level, isGameOver, isWinner, isUltraInstinct,
           addScore, loseLife, nextLevel } = useGame();
 
-  const { question, questionsCompleted, lastResult, config, handleAnswer, nextQuestion, resetProgress } =
+  const { question, questionsCompleted, lastResult, config, handleAnswer, nextQuestion } =
     useGameLogic(level, isUltraInstinct);
 
   const sound = useSound();
@@ -92,7 +92,6 @@ export default function GamePage() {
         lockedRef.current = false;
         setLocked(false);
         nextLevel();
-        resetProgress();
         setTimerKey(k => k + 1);
       }, 2000);
     }
