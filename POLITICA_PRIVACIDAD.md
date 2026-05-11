@@ -66,7 +66,7 @@ Tomamos medidas razonables para proteger la información, pero ningún sistema e
 
 ## 10. Menores de edad
 
-Color Rush está destinado al público general. Si eres menor de edad, te recomendamos usar la app con supervisión de tu tutor legal.
+Color Rush está destinado al público general.
 
 ## 11. Cambios en esta política
 
@@ -76,8 +76,6 @@ Podemos actualizar esta política en el futuro. Publicaremos la versión revisad
 
 Si tienes preguntas sobre esta Política de Privacidad, puedes contactar a:
 
-**Correo:** [tu-correo@ejemplo.com]
+**Correo:** [federmarquezcalle@gmail.com]
 
 ---
-
-> **Nota:** Este documento es una plantilla informativa y no constituye asesoramiento legal. Antes de publicar la app, conviene revisarlo con un profesional legal para adaptarlo a tu caso real.
